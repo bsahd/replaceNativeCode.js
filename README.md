@@ -13,4 +13,4 @@ copyright (c) 2024- Ayasaka-Koto
 
 ## 置き換えたメソッド
 
-- (ここに置き換えたメソッドを列挙する)
+- `Math.abs()`
