@@ -13,6 +13,12 @@
 
 ---
 
-## 置き換えたメソッド
+## 置き換えたメソッド/プロパティ
 
 - `Math.abs()`
+- `Math.max()`
+- `Math.min()`
+- `Math.pow()`
+- `Math.exp()`
+- `Math.PI`
+- `Math.E`

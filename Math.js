@@ -11,11 +11,7 @@ class Math {
 		return n.reduce((x, y) => (x > y ? y : x));
 	}
 	static pow(x, y) {
-		let res = x;
-		for (let index = 0; index < y - 1; index++) {
-			res = res * x;
-		}
-		return res;
+		return x**y;
 	}
 	static exp = (x) => this.pow(this.E, x);
 }
