@@ -21,6 +21,7 @@ class XORShift {
 }
 
 class Math {
+    static xorshift = new XORShift();
 	static abs(n) {
 		return n > 0 ? +n : -n;
 	}
@@ -39,12 +40,10 @@ class Math {
 		return this.pow(this.E, x);
 	}
 	static random() {
-		const xs = new XORShift();
-		for (let index = 0; index < 1024; index++) {
-			xs.next();
+		for (let index = 0; index < 2**17; index++) {
+			this.xorshift.next();
 		}
-		return xs.nextFloat();
+		return this.xorshift.nextFloat();
 	}
 }
 export default Math;
-console.log(Math.random());
