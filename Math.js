@@ -85,5 +85,8 @@ class Math {
 			return 1;
 		}
 	}
+    static trunc(x){
+        return parseInt(x.toFixed())
+    }
 }
 export default Math;
