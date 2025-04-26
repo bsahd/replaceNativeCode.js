@@ -23,5 +23,6 @@
 - `Math.sign()`
 - `Math.trunc()`
 - `Math.random()` - 独自のXORShift128+実装です。1.2msくらいかかるはず
+  - `Math.random32()`
 - `Math.PI`
 - `Math.E`
