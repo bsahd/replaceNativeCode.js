@@ -1,27 +1,32 @@
-class XORShift {
-	constructor(seed = Date.now()) {
-		this.x = seed || 123456789;
-		this.y = 362436069;
-		this.z = 521288629;
-		this.w = 88675123;
+class XORShift128Plus {
+	constructor(seed1 = 123n, seed2 = 456n) {
+		if (seed1 === 0n && seed2 === 0n) {
+			throw new Error("Seeds must not be both zero.");
+		}
+		this.s0 = BigInt(seed1);
+		this.s1 = BigInt(seed2);
 	}
 
-	next() {
-		let t = this.x ^ (this.x << 11);
-		this.x = this.y;
-		this.y = this.z;
-		this.z = this.w;
-		this.w = this.w ^ (this.w >>> 19) ^ (t ^ (t >>> 8));
-		return this.w >>> 0; // 符号なし32bit整数
-	}
+	nextBigInt() {
+		let x = this.s0;
+		let y = this.s1;
+		this.s0 = y;
 
+		x ^= x << 23n;
+		x ^= x >> 17n;
+		x ^= y ^ (y >> 26n);
+		this.s1 = x;
+
+		return (this.s0 + this.s1) & ((1n << 64n) - 1n); // 64bitにマスク
+	}
 	nextFloat() {
-		return this.next() / 0xffffffff;
+		// 0 <= x < 1 に正しくする（2^64で割る）
+		return Number(this.nextBigInt()) / Number(1n << 64n);
 	}
 }
 
 class Math {
-    static xorshift = new XORShift();
+	static xorshift = new XORShift128Plus();
 	static abs(n) {
 		return n > 0 ? +n : -n;
 	}
@@ -40,8 +45,8 @@ class Math {
 		return this.pow(this.E, x);
 	}
 	static random() {
-		for (let index = 0; index < 2**17; index++) {
-			this.xorshift.next();
+		for (let index = 0; index < 2 ** 6; index++) {
+			this.xorshift.nextBigInt();
 		}
 		return this.xorshift.nextFloat();
 	}
