@@ -1,10 +1,36 @@
+class XORShift32 {
+	constructor(seed = Date.now()) {
+		this.x = seed;
+		this.y = 362436069;
+		this.z = 521288629;
+		this.w = 88675123;
+	}
+
+	next() {
+		let t = this.x ^ (this.x << 11);
+		this.x = this.y;
+		this.y = this.z;
+		this.z = this.w;
+		this.w = this.w ^ (this.w >>> 19) ^ (t ^ (t >>> 8));
+		return this.w >>> 0; // 符号なし32bit整数
+	}
+
+	nextFloat() {
+		return this.next() / 0xffffffff;
+	}
+}
+
 class XORShift128Plus {
-	constructor(seed1 = 123n, seed2 = 456n) {
-		if (seed1 === 0n && seed2 === 0n) {
-			throw new Error("Seeds must not be both zero.");
+	constructor() {
+		const xs = new XORShift32();
+		for (let index = 0; index < 2 ** 20; index++) {
+			xs.next();
 		}
-		this.s0 = BigInt(seed1);
-		this.s1 = BigInt(seed2);
+		this.s0 = BigInt(xs.next());
+		for (let index = 0; index < 2 ** 20; index++) {
+			xs.next();
+		}
+		this.s1 = BigInt(xs.next());
 	}
 
 	nextBigInt() {
