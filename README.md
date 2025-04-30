@@ -13,6 +13,16 @@
 
 ---
 
-## 置き換えたメソッド
+## 置き換えたメソッド/プロパティ
 
 - `Math.abs()`
+- `Math.max()`
+- `Math.min()`
+- `Math.pow()`
+- `Math.exp()`
+- `Math.sign()`
+- `Math.trunc()`
+- `Math.random()` - 独自のXORShift128+実装です。1.2msくらいかかるはず
+  - `Math.random32()`
+- `Math.PI`
+- `Math.E`
