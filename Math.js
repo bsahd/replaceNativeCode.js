@@ -51,7 +51,7 @@ class XORShift128Plus {
 }
 
 class Math {
-    static xorshift32 = new XORShift32();
+	static xorshift32 = new XORShift32();
 	static xorshift = new XORShift128Plus(this.xorshift32);
 	static abs(n) {
 		return n > 0 ? +n : -n;
@@ -76,13 +76,12 @@ class Math {
 		}
 		return this.xorshift.nextFloat();
 	}
-    static random32(){
+	static random32() {
 		for (let index = 0; index < 2 ** 17.5; index++) {
 			this.xorshift32.next();
 		}
 		return this.xorshift32.nextFloat();
-
-    }
+	}
 	static sign(x) {
 		if (x < 0) {
 			return -1;
@@ -92,8 +91,8 @@ class Math {
 			return 1;
 		}
 	}
-    static trunc(x){
-        return parseInt(x.toFixed())
-    }
+	static trunc(x) {
+		return parseInt(x.toFixed());
+	}
 }
 export default Math;
