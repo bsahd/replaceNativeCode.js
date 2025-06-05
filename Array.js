@@ -19,9 +19,3 @@ function array_map(array, callback) {
 		res.push(callback(array[index],index,array))
 	}
 }
-console.log(
-	array_reduce(
-		Array.from({ length: 6 }, (_, a) => a),
-		(a, b) => a + b,
-	),
-);
